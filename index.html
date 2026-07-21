@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard doanh thu T7 — LCP / LCR / RNS</title>
+<style>
+:root { --bg:#0b1220; --panel:#101827; --text:#e5eefc; --muted:#8ea3bf; --line:#22314a; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:radial-gradient(circle at 20% 0%, #1a2b4a 0%, var(--bg) 38%); color:var(--text); padding:24px; }
+h1 { margin:0; font-size:28px; }
+.sub { color:var(--muted); margin:6px 0 20px; }
+.grid4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-bottom:14px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.card { background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025)); border:1px solid rgba(148,163,184,.18); border-radius:18px; padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.22); }
+.klabel { color:var(--muted); font-size:13px; }
+.kvalue { font-size:28px; font-weight:800; margin-top:4px; }
+.section-title { margin:0 0 12px; font-size:18px; }
+table { width:100%; border-collapse:collapse; overflow:hidden; }
+th,td { padding:11px 12px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+th:first-child,td:first-child { text-align:left; }
+th { color:#b9c7dc; font-size:12px; text-transform:uppercase; letter-spacing:.04em; background:rgba(255,255,255,.035); }
+tr:hover td { background:rgba(255,255,255,.03); }
+tbody tr:last-child th { font-size:18px; font-weight:900; color:#ffffff; background:rgba(96,165,250,.14); }
+tbody tr:last-child th:first-child { letter-spacing:.04em; }
+.dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; }
+canvas { max-height:360px; }
+.chartbox { padding-top:6px; }
+.branch-row { margin:14px 0 18px; }
+.branch-name { color:#dbeafe; font-weight:700; margin-bottom:8px; }
+.bar-pair { display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:end; height:160px; padding:10px 6px 0; border-bottom:1px solid var(--line); }
+.barwrap { height:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:6px; }
+.bar { width:58%; min-width:34px; border-radius:10px 10px 0 0; box-shadow:0 8px 18px rgba(0,0,0,.22); }
+.bar.blue { background:linear-gradient(180deg,#60a5fa,#2563eb); }
+.bar.yellow { background:linear-gradient(180deg,#facc15,#f59e0b); }
+.bar-value { font-size:12px; color:#cbd5e1; }
+.legend { display:flex; gap:16px; color:#cbd5e1; font-size:13px; margin-top:10px; }
+.legend span:before { content:''; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+.legend .blue:before { background:#2563eb; }
+.legend .yellow:before { background:#f59e0b; }
+
+.tablewrap { overflow:auto; }
+@media (max-width:900px) { .grid4,.grid2 { grid-template-columns:1fr; } body { padding:14px; } }
+</style>
+</head>
+<body>
+<h1>Dashboard doanh thu T7 — LCP / LCR / RNS</h1>
+<div class="sub">Dashboard web local kiểu SecondBrain. Dữ liệu kéo từ tab T7 của 3 Google Sheets.</div>
+
+<div class="grid4">
+  <div class="card"><div class="klabel">Tổng doanh thu</div><div class="kvalue">376.759.000</div></div>
+  <div class="card"><div class="klabel">Tổng target</div><div class="kvalue">880.000.000</div></div>
+  <div class="card"><div class="klabel">KPI chung</div><div class="kvalue">42.8%</div></div>
+  <div class="card"><div class="klabel">Tổng khách</div><div class="kvalue">233</div></div>
+</div>
+
+<div class="grid2">
+  <div class="card"><h2 class="section-title">Biểu đồ cột doanh thu vs target</h2>
+<div class="chartbox">
+  <div class="branch-row"><div class="branch-name">LCP</div><div class="bar-pair"><div class="barwrap"><div class="bar blue" style="height:39.3%"></div><div class="bar-value">117.798.000</div></div><div class="barwrap"><div class="bar yellow" style="height:100%"></div><div class="bar-value">300.000.000</div></div></div></div>
+  <div class="branch-row"><div class="branch-name">LCR</div><div class="bar-pair"><div class="barwrap"><div class="bar blue" style="height:54.8%"></div><div class="bar-value">164.495.000</div></div><div class="barwrap"><div class="bar yellow" style="height:100%"></div><div class="bar-value">300.000.000</div></div></div></div>
+  <div class="branch-row"><div class="branch-name">RNS</div><div class="bar-pair"><div class="barwrap"><div class="bar blue" style="height:33.7%"></div><div class="bar-value">94.466.000</div></div><div class="barwrap"><div class="bar yellow" style="height:100%"></div><div class="bar-value">280.000.000</div></div></div></div>
+  <div class="legend"><span class="blue">Doanh thu</span><span class="yellow">Target</span></div>
+</div></div>
+  <div class="card"><h2 class="section-title">Biểu đồ cột KPI % từng chi nhánh</h2>
+<div class="chartbox">
+  <div class="branch-row"><div class="branch-name">LCP</div><div class="bar-pair"><div class="barwrap"><div class="bar blue" style="height:39.3%"></div><div class="bar-value">39.3%</div></div><div class="barwrap"><div class="bar yellow" style="height:60.7%"></div><div class="bar-value">60.7%</div></div></div></div>
+  <div class="branch-row"><div class="branch-name">LCR</div><div class="bar-pair"><div class="barwrap"><div class="bar blue" style="height:54.8%"></div><div class="bar-value">54.8%</div></div><div class="barwrap"><div class="bar yellow" style="height:45.2%"></div><div class="bar-value">45.2%</div></div></div></div>
+  <div class="branch-row"><div class="branch-name">RNS</div><div class="bar-pair"><div class="barwrap"><div class="bar blue" style="height:33.7%"></div><div class="bar-value">33.7%</div></div><div class="barwrap"><div class="bar yellow" style="height:66.3%"></div><div class="bar-value">66.3%</div></div></div></div>
+  <div class="legend"><span class="blue">Đã đạt</span><span class="yellow">Còn lại tới 100%</span></div>
+</div></div>
+</div>
+
+<div class="card" style="margin-bottom:14px">
+  <h2 class="section-title">1/ Bảng doanh thu ngày — 3 chi nhánh</h2>
+  <div class="tablewrap"><table><thead><tr><th>Ngày</th><th>LCP</th><th>LCR</th><th>RNS</th><th>Tổng ngày</th></tr></thead><tbody><tr><td>1/7/2026</td><td>4.100.000</td><td>3.850.000</td><td>3.995.000</td><td>11.945.000</td></tr><tr><td>2/7/2026</td><td>9.650.000</td><td>5.700.000</td><td>3.750.000</td><td>19.100.000</td></tr><tr><td>3/7/2026</td><td>8.300.000</td><td>27.550.000</td><td>8.700.000</td><td>44.550.000</td></tr><tr><td>4/7/2026</td><td>16.660.000</td><td>6.800.000</td><td>850.000</td><td>24.310.000</td></tr><tr><td>5/7/2026</td><td>11.600.000</td><td>17.950.000</td><td>4.920.000</td><td>34.470.000</td></tr><tr><td>6/7/2026</td><td>3.500.000</td><td>4.450.000</td><td>9.050.000</td><td>17.000.000</td></tr><tr><td>7/7/2026</td><td>6.950.000</td><td>12.550.000</td><td>1.700.000</td><td>21.200.000</td></tr><tr><td>8/7/2026</td><td>8.310.000</td><td>11.600.000</td><td>2.350.000</td><td>22.260.000</td></tr><tr><td>9/7/2026</td><td>8.950.000</td><td>7.950.000</td><td>8.583.000</td><td>25.483.000</td></tr><tr><td>10/7/2026</td><td>7.700.000</td><td>2.550.000</td><td>10.700.000</td><td>20.950.000</td></tr><tr><td>11/7/2026</td><td>2.400.000</td><td>2.500.000</td><td>6.250.000</td><td>11.150.000</td></tr><tr><td>12/7/2026</td><td>15.710.000</td><td>7.900.000</td><td>8.260.000</td><td>31.870.000</td></tr><tr><td>13/7/2026</td><td>3.900.000</td><td>3.100.000</td><td>3.700.000</td><td>10.700.000</td></tr><tr><td>14/7/2026</td><td>11.200.000</td><td>7.100.000</td><td>5.300.000</td><td>23.600.000</td></tr><tr><td>15/7/2026</td><td>2.850.000</td><td>6.745.000</td><td>1.200.000</td><td>10.795.000</td></tr><tr><td>16/7/2026</td><td>2.600.000</td><td>2.400.000</td><td>2.300.000</td><td>7.300.000</td></tr><tr><td>17/7/2026</td><td>4.250.000</td><td>2.200.000</td><td>5.293.000</td><td>11.743.000</td></tr><tr><td>18/7/2026</td><td>14.110.000</td><td>6.500.000</td><td>1.900.000</td><td>22.510.000</td></tr><tr><td>19/7/2026</td><td>6.250.000</td><td>20.350.000</td><td>0</td><td>26.600.000</td></tr><tr><td>20/7/2026</td><td>950.000</td><td>9.400.000</td><td>6.050.000</td><td>16.400.000</td></tr><tr><td>21/7/2026</td><td>1.700.000</td><td>4.600.000</td><td>5.165.000</td><td>11.465.000</td></tr><tr><td>22/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>23/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>24/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>25/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>26/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>27/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>28/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>29/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>30/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>31/7/2026</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+</div>
+
+<div class="card">
+  <h2 class="section-title">2/ Bảng tổng doanh thu và KPI%</h2>
+  <div class="tablewrap"><table><thead><tr><th>Chi nhánh</th><th>Doanh thu</th><th>Target</th><th>% KPI</th><th>Còn lại</th><th>/Day</th><th>Khách</th><th>AOV</th></tr></thead><tbody><tr><td><span class='dot' style='background:#2563eb'></span>LCP</td><td>117.798.000</td><td>300.000.000</td><td>39.3%</td><td>182.202.000</td><td>18.220.200</td><td>79</td><td>1.491.114</td></tr><tr><td><span class='dot' style='background:#dc2626'></span>LCR</td><td>164.495.000</td><td>300.000.000</td><td>54.8%</td><td>135.505.000</td><td>13.550.500</td><td>139</td><td>1.183.417</td></tr><tr><td><span class='dot' style='background:#16a34a'></span>RNS</td><td>94.466.000</td><td>280.000.000</td><td>33.7%</td><td>185.534.000</td><td>18.553.400</td><td>15</td><td>6.297.733</td></tr><tr><th>TỔNG</th><th>376.759.000</th><th>880.000.000</th><th>42.8%</th><th>503.241.000</th><th></th><th>233</th><th>1.616.991</th></tr></tbody></table></div>
+</div>
+
+<div class="card" style="margin-top:14px">
+  <h2 class="section-title">3/ Tổng số lượng KL, KQL, KQ, KT và Total khách</h2>
+  <div class="tablewrap"><table><thead><tr><th>Chi nhánh</th><th>KL</th><th>KQL</th><th>KQ</th><th>KT</th><th>Total khách</th></tr></thead><tbody><tr><td>LCP</td><td>77</td><td>2</td><td>0</td><td>0</td><td>79</td></tr><tr><td>LCR</td><td>121</td><td>6</td><td>0</td><td>12</td><td>139</td></tr><tr><td>RNS</td><td>10</td><td>7</td><td>0</td><td>3</td><td>20</td></tr><tr><th>TỔNG</th><th>208</th><th>15</th><th>0</th><th>15</th><th>238</th></tr></tbody></table></div>
+</div>
+
+</body>
+</html>
